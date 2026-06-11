@@ -125,6 +125,7 @@ html,body{font-family:'Noto Sans KR',sans-serif;color:var(--ink1);background:var
 .action-btn::before,.action-btn::after{content:'◆';position:absolute;top:50%;transform:translateY(-50%);font-size:7px;color:var(--gold);opacity:.6;}
 .action-btn::before{left:16px;}.action-btn::after{right:16px;}
 .action-btn:hover{background:linear-gradient(180deg,rgba(234,217,140,0.32),rgba(212,185,106,0.45));transform:translateY(-1px);}
+.copyright{margin-top:28px;padding:16px 0;border-top:1px solid var(--border2);text-align:center;font-size:11px;color:var(--ink4);line-height:1.7;letter-spacing:0.03em;}
 .page-header{display:flex;align-items:center;gap:14px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border2);position:relative;}
 .page-header::after{content:'';position:absolute;bottom:-1px;left:0;width:48px;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold2));box-shadow:0 0 6px var(--gold);}
 .page-h-name{font-family:'Noto Serif KR',serif;font-size:22px;font-weight:700;color:var(--ink1);}
@@ -222,7 +223,6 @@ html,body{font-family:'Noto Sans KR',sans-serif;color:var(--ink1);background:var
   </div>
 </div>
 <script>
-/* ── Google Sheets 다운로드 로깅 ── */
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbw9hudQY1UZtSIsoC0xBcitUXyl4gC8cYvrtFqkWMn9AyyGQdNCXOnFhbljDYX5d2bX1w/exec';
 function logDownload(fileName, fileType) {
   const now = new Date();
@@ -238,6 +238,8 @@ function logDownload(fileName, fileType) {
   const img = new Image();
   img.src = SHEETS_URL + '?' + params.toString();
 }
+
+const COPYRIGHT = '<div class="copyright">© 2026. 박세연 All rights reserved.<br>본 포트폴리오 내 모든 작업물의 무단 도용 및 불법 공유를 금지합니다.</div>';
 
 const DATA = {
   image: "",
@@ -337,12 +339,13 @@ function renderBasic(){
     <div class="card"><div class="two-col"><div><div class="card-title">${IC.mail} 정보</div>${stats}</div><div class="two-col-divider"><div class="card-title">${IC.edu} 학력 및 교육 이수</div>${eduRows}</div></div></div>
     <div class="card"><div class="two-col"><div><div class="card-title">${IC.skill} 보유 기술</div><div class="skills-list">${skills}</div></div><div class="two-col-divider"><div class="card-title">${IC.cert} 보유 자격증</div><div class="cert-list">${certs}</div></div></div></div>
     <div class="card"><div class="card-title">${IC.career} 경력</div>${careerItems}</div>
-    <a class="action-btn" href="이력서_박세연.pdf" download="이력서_박세연.pdf" id="resumeDownloadBtn">${IC.dl} 이력서 다운로드</a>`;
+    <a class="action-btn" href="이력서_박세연.pdf" download="이력서_박세연.pdf" id="resumeDownloadBtn">${IC.dl} 이력서 다운로드</a>
+    ${COPYRIGHT}`;
 }
 function renderAbout(){
   const d = DATA.about;
   const body = d.body.split('\n').filter(p=>p.trim()).map(p=>`<p>${p}</p>`).join('');
-  return `<div class="page-header"><div><div class="page-h-name">${d.headline}</div><div class="page-h-en">About Me</div></div><span class="page-h-tag">ABOUT</span></div><div class="card"><div class="about-body">${body}</div></div>`;
+  return `<div class="page-header"><div><div class="page-h-name">${d.headline}</div><div class="page-h-en">About Me</div></div><span class="page-h-tag">ABOUT</span></div><div class="card"><div class="about-body">${body}</div></div>${COPYRIGHT}`;
 }
 function renderPortfolio(){ return curPF!==null ? renderPFDetail(curPF) : renderPFList(); }
 function renderPFList(){
@@ -363,12 +366,12 @@ function renderPFList(){
       </div>
     </div>`;
   }).join('');
-  return `<div class="page-header"><div><div class="page-h-name">Portfolio</div><div class="page-h-en">Works &amp; Documents</div></div><span class="page-h-tag">WORKS</span></div><div class="pf-grid">${cards}</div>`;
+  return `<div class="page-header"><div><div class="page-h-name">Portfolio</div><div class="page-h-en">Works &amp; Documents</div></div><span class="page-h-tag">WORKS</span></div><div class="pf-grid">${cards}</div>${COPYRIGHT}`;
 }
 function renderPFDetail(id){
   const p = DATA.portfolio[id];
   const dlBtn = p.dl?`<button class="pf-dl-btn" data-dl="${p.dl}" data-dlname="${p.dlName||p.dl}">${IC.dl} 다운로드</button>`:'';
-  return `<div class="pf-detail"><div class="pf-detail-hd"><button class="pf-back" data-back="1">${IC.back} 목록으로</button><div class="pf-detail-title">${p.title}</div>${dlBtn}</div><div class="pf-body">${p.desc?`<p class="pf-body-desc">${p.desc}</p>`:''}<div class="pf-empty">상단의 <b>다운로드</b> 버튼을 통해 포트폴리오 파일을 받아보실 수 있습니다.</div></div></div>`;
+  return `<div class="pf-detail"><div class="pf-detail-hd"><button class="pf-back" data-back="1">${IC.back} 목록으로</button><div class="pf-detail-title">${p.title}</div>${dlBtn}</div><div class="pf-body">${p.desc?`<p class="pf-body-desc">${p.desc}</p>`:''}<div class="pf-empty">상단의 <b>다운로드</b> 버튼을 통해 포트폴리오 파일을 받아보실 수 있습니다.</div></div></div>${COPYRIGHT}`;
 }
 function switchTab(tab){
   curTab=tab;
