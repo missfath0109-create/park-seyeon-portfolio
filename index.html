@@ -24,25 +24,11 @@
   --shadow: 0 8px 32px rgba(0,0,0,0.6);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-html,body{
-  font-family:'Noto Sans KR',sans-serif;
-  color:var(--ink1);
-  background:var(--bg);
-  height:100%;
-  overflow:hidden;
-}
+html,body{font-family:'Noto Sans KR',sans-serif;color:var(--ink1);background:var(--bg);height:100%;overflow:hidden;}
 #bgLayer{position:fixed;inset:0;z-index:0;background:url('bg.jpg') center/cover no-repeat;filter:blur(6px) saturate(0.7) brightness(0.4);transform:scale(1.06);}
 #bgOverlay{position:fixed;inset:0;z-index:1;background:linear-gradient(135deg,rgba(10,14,24,0.62) 0%,rgba(14,20,32,0.55) 100%);}
 #app{position:relative;z-index:2;height:100vh;display:flex;flex-direction:column;overflow:hidden;}
-#hud{
-  flex-shrink:0;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:12px 48px;
-  background:linear-gradient(180deg,rgba(10,14,24,0.95) 0%,rgba(14,20,32,0.88) 100%);
-  border-bottom:1px solid var(--border);
-  backdrop-filter:blur(16px);
-  position:relative;z-index:100;
-}
+#hud{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:12px 48px;background:linear-gradient(180deg,rgba(10,14,24,0.95) 0%,rgba(14,20,32,0.88) 100%);border-bottom:1px solid var(--border);backdrop-filter:blur(16px);position:relative;z-index:100;}
 .hud-line{position:absolute;bottom:0;left:48px;right:48px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent);opacity:0.5;}
 .hud-diamond{position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);width:9px;height:9px;background:var(--gold2);clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);box-shadow:0 0 8px var(--gold2);}
 .hud-left{display:flex;align-items:center;gap:16px;}
@@ -51,22 +37,8 @@ html,body{
 .hud-subtitle{font-size:10px;color:var(--ink3);letter-spacing:0.2em;text-transform:uppercase;margin-top:2px;}
 .hud-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;font-size:11px;font-weight:500;letter-spacing:0.08em;color:var(--ink2);border:1px solid var(--border2);border-radius:2px;background:rgba(255,255,255,0.04);cursor:pointer;transition:all .2s;font-family:'Noto Sans KR',sans-serif;}
 .hud-btn:hover{color:var(--gold2);border-color:var(--border);background:rgba(212,185,106,0.08);}
-#main{
-  display:grid;
-  grid-template-columns:240px 1fr;
-  flex:1;
-  min-height:0;
-  overflow:hidden;
-}
-#leftNav{
-  background:linear-gradient(180deg,rgba(10,14,24,0.95),rgba(14,20,32,0.92));
-  border-right:1px solid var(--border2);
-  display:flex;flex-direction:column;
-  padding:36px 0;
-  height:100%;
-  overflow-y:auto;
-  overflow-x:hidden;
-}
+#main{display:grid;grid-template-columns:240px 1fr;flex:1;min-height:0;overflow:hidden;}
+#leftNav{background:linear-gradient(180deg,rgba(10,14,24,0.95),rgba(14,20,32,0.92));border-right:1px solid var(--border2);display:flex;flex-direction:column;padding:36px 0;height:100%;overflow-y:auto;overflow-x:hidden;}
 .nav-label{font-size:13px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink3);padding:0 28px 10px;font-weight:600;}
 .nav-item{display:flex;align-items:center;gap:14px;padding:15px 28px;font-family:'Noto Serif KR',serif;font-size:15px;font-weight:500;letter-spacing:0.06em;color:var(--ink3);cursor:pointer;transition:all .25s;position:relative;border:none;background:none;width:100%;text-align:left;}
 .nav-item .nav-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink4);width:20px;flex-shrink:0;}
@@ -77,16 +49,7 @@ html,body{
 .nav-item.active::after{content:'◆';position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:6px;color:var(--gold);opacity:0.7;}
 .nav-bottom{margin-top:auto;padding:0 20px;}
 .nav-version{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink4);text-align:center;padding:14px 0;border-top:1px solid var(--border2);letter-spacing:0.1em;}
-#content{
-  display:grid;
-  grid-template-columns:300px 1fr;
-  gap:32px;
-  padding:40px 48px;
-  align-items:start;
-  height:100%;
-  overflow-y:auto;
-  overflow-x:hidden;
-}
+#content{display:grid;grid-template-columns:300px 1fr;gap:32px;padding:40px 48px;align-items:start;height:100%;overflow-y:auto;overflow-x:hidden;}
 #content.wide{grid-template-columns:1fr;padding:48px 64px;}
 #charPanel{position:sticky;top:0;display:flex;flex-direction:column;gap:16px;}
 .char-frame{background:linear-gradient(180deg,rgba(28,37,64,0.8),rgba(14,20,32,0.95));border:1px solid var(--border);border-radius:3px;aspect-ratio:3/4;position:relative;overflow:hidden;box-shadow:var(--shadow),inset 0 1px 0 rgba(212,185,106,0.15);}
@@ -171,8 +134,10 @@ html,body{
 .pf-card{background:linear-gradient(180deg,rgba(28,37,64,0.75),rgba(14,20,32,0.9));border:1px solid var(--border2);border-radius:3px;overflow:hidden;cursor:pointer;transition:all .25s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;box-shadow:0 4px 16px rgba(0,0,0,0.4);}
 .pf-card:hover{transform:translateY(-5px);border-color:var(--gold2);box-shadow:0 16px 32px rgba(0,0,0,0.5),0 0 16px rgba(212,185,106,0.15);}
 .pf-thumb{aspect-ratio:16/9;background:linear-gradient(135deg,rgba(28,37,64,0.9),rgba(10,14,24,0.95));position:relative;overflow:hidden;border-bottom:1px solid var(--border2);}
-.pf-badge{position:absolute;top:8px;left:8px;padding:3px 9px;font-size:9px;font-weight:500;letter-spacing:0.1em;color:var(--gold2);border:1px solid var(--border);border-radius:1px;background:rgba(10,14,24,0.88);backdrop-filter:blur(8px);}
-.pf-dl-icon{position:absolute;bottom:8px;right:8px;width:26px;height:26px;display:flex;align-items:center;justify-content:center;background:rgba(10,14,24,0.88);border:1px solid var(--border);border-radius:1px;color:var(--gold2);}
+.pf-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.16,1,.3,1);}
+.pf-card:hover .pf-thumb img{transform:scale(1.05);}
+.pf-badge{position:absolute;top:8px;left:8px;padding:3px 9px;font-size:9px;font-weight:500;letter-spacing:0.1em;color:var(--gold2);border:1px solid var(--border);border-radius:1px;background:rgba(10,14,24,0.88);backdrop-filter:blur(8px);z-index:1;}
+.pf-dl-icon{position:absolute;bottom:8px;right:8px;width:26px;height:26px;display:flex;align-items:center;justify-content:center;background:rgba(10,14,24,0.88);border:1px solid var(--border);border-radius:1px;color:var(--gold2);z-index:1;}
 .pf-thumb-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
 .pf-ph-icon{color:var(--gold);opacity:0.25;}
 .pf-ph-text{font-family:'Noto Serif KR',serif;font-size:11px;color:var(--ink3);text-align:center;padding:0 12px;}
@@ -305,7 +270,7 @@ const DATA = {
     body: `예능 방송의 자막 디자인 업무를 수행하며 시청자의 니즈를 파악하여 시청자가 어떤 타이밍에 웃고, 어떤 표현에 더 쉽게 반응하는지 고민하며 장면의 재미를 극대화하는 과정에서 큰 매력을 느껴왔습니다. 자막은 화면 위에 짧게 머무는 요소이지만, 표현 방식과 배치, 타이밍에 따라 장면의 몰입도와 전달력이 달라진다는 점을 현장에서 배웠습니다.\n이 경험을 통해 저는 콘텐츠의 재미가 큰 연출에서만 만들어지는 것이 아니라, 사용자가 자연스럽게 받아들이는 작은 디테일에서 완성된다는 점을 깨달았습니다. 이후에는 재미를 더 능동적으로 기획할 수 있는 분야에 도전하고 싶어 게임 기획자로 직무를 전환하였습니다.\n저는 방송에서 익힌 트렌디한 감각과 디테일을 바탕으로, 유저의 니즈를 파악하고 재미를 느낄 수 있는 콘텐츠를 만드는 기획자로 성장하고자 합니다. 이제는 경험과 감각에 기반한 기획을 넘어, [AX융합 데이터 기반 기획자] 교육 과정을 통해 웹 크롤링과 데이터 분석 방법을 익히고 있습니다. 이를 바탕으로 게임에 대한 유저 리뷰와 불만 사항, 만족 요인을 수집·분석하여 인사이트를 도출하고, 유저가 실제로 원하는 콘텐츠를 기획하는 실무형 전문 기획자가 되고 싶습니다.`
   },
   portfolio: [
-    { title:"두근두근타운 분석 및 개선안", desc:"라이프 시뮬레이션 게임의 시스템 구조 분석과 개선안 제안", tag:"게임 분석", dl:"두근두근타운_분석 및 개선안_박세연.pdf", dlName:"두근두근타운_분석및개선안_박세연.pdf" },
+    { title:"두근두근타운 분석 및 개선안", desc:"라이프 시뮬레이션 게임의 시스템 구조 분석과 개선안 제안", tag:"게임 분석", dl:"두근두근타운_분석 및 개선안_박세연.pdf", dlName:"두근두근타운_분석및개선안_박세연.pdf", thumbnail:"홈페이지 작업/thumbnails/thumb_dugeun.png" },
     { title:"원신 비경 역기획서", desc:"원신 비경 시스템의 역기획 및 구조 분석", tag:"역기획", dl:"원신_비경_역기획서_박세연.xlsx", dlName:"원신_비경_역기획서_박세연.xlsx" },
     { title:"원신 비경 테이블", desc:"원신 비경 시스템 데이터 테이블 정리", tag:"역기획", dl:"원신_비경_테이블_박세연.xlsx", dlName:"원신_비경_테이블_박세연.xlsx" },
     { title:"블루아카이브 고유무기 역기획서", desc:"블루아카이브 고유무기 시스템의 역기획 및 구조 분석", tag:"역기획", dl:"블루아카이브_고유무기_역기획서_박세연.xlsx", dlName:"블루아카이브_고유무기_역기획서_박세연.xlsx" },
@@ -364,7 +329,23 @@ function renderAbout(){
 }
 function renderPortfolio(){ return curPF!==null ? renderPFDetail(curPF) : renderPFList(); }
 function renderPFList(){
-  const cards = DATA.portfolio.map((p,i)=>`<div class="pf-card" data-pf="${i}"><div class="pf-thumb"><div class="pf-thumb-ph"><span class="pf-ph-icon">${IC.doc}</span><span class="pf-ph-text">${p.title}</span></div>${p.tag?`<div class="pf-badge">${p.tag}</div>`:''} ${p.dl?`<div class="pf-dl-icon">${IC.dl}</div>`:''}</div><div class="pf-info"><div class="pf-title">${p.title}</div>${p.desc?`<div class="pf-desc">${p.desc}</div>`:''}</div></div>`).join('');
+  const cards = DATA.portfolio.map((p,i)=>{
+    const thumbInner = p.thumbnail
+      ? `<img src="${p.thumbnail}" alt="${p.title}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+         <div class="pf-thumb-ph" style="display:none;"><span class="pf-ph-icon">${IC.doc}</span><span class="pf-ph-text">${p.title}</span></div>`
+      : `<div class="pf-thumb-ph"><span class="pf-ph-icon">${IC.doc}</span><span class="pf-ph-text">${p.title}</span></div>`;
+    return `<div class="pf-card" data-pf="${i}">
+      <div class="pf-thumb">
+        ${thumbInner}
+        ${p.tag?`<div class="pf-badge">${p.tag}</div>`:''}
+        ${p.dl?`<div class="pf-dl-icon">${IC.dl}</div>`:''}
+      </div>
+      <div class="pf-info">
+        <div class="pf-title">${p.title}</div>
+        ${p.desc?`<div class="pf-desc">${p.desc}</div>`:''}
+      </div>
+    </div>`;
+  }).join('');
   return `<div class="page-header"><div><div class="page-h-name">Portfolio</div><div class="page-h-en">Works &amp; Documents</div></div><span class="page-h-tag">WORKS</span></div><div class="pf-grid">${cards}</div>`;
 }
 function renderPFDetail(id){
