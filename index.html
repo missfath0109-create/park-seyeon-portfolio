@@ -392,7 +392,15 @@ function switchTab(tab){
   contentEl.scrollTop = 0;
   const resumeBtn = document.getElementById('resumeDownloadBtn');
   if(resumeBtn){
-    resumeBtn.addEventListener('click', () => logDownload('이력서_박세연.pdf', '이력서'));
+    resumeBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  window.location.href = getDownloadLogUrl(
+    '이력서_박세연.pdf',
+    '이력서',
+    '이력서_박세연.pdf'
+  );
+});
   }
 }
 document.getElementById('leftNav').addEventListener('click',e=>{
@@ -406,14 +414,16 @@ infoPanelEl.addEventListener('click',e=>{
   const back=e.target.closest('[data-back]');
   if(back){curPF=null;switchTab('portfolio');return;}
   const dlBtn=e.target.closest('[data-dl]');
-  if(dlBtn){
-    const fileName = dlBtn.dataset.dlname || dlBtn.dataset.dl;
-    logDownload(fileName, '포트폴리오');
-    const a = document.createElement('a');
-    a.href = dlBtn.dataset.dl;
-    a.download = dlBtn.dataset.dlname || dlBtn.dataset.dl;
-    a.click();
-  }
+if(dlBtn){
+  const filePath = dlBtn.dataset.dl;
+  const fileName = dlBtn.dataset.dlname || dlBtn.dataset.dl;
+
+  window.location.href = getDownloadLogUrl(
+    filePath,
+    '포트폴리오',
+    fileName
+  );
+}
 });
 switchTab('basic');
 </script>
