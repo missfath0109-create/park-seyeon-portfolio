@@ -231,12 +231,13 @@ function logDownload(fileName, fileType) {
     fileName: fileName,
     fileType: fileType,
     timestamp: kst.toISOString().replace('T', ' ').slice(0, 19),
-    browser: navigator.userAgent,
     language: navigator.language || '-',
-    screen: screen.width + 'x' + screen.height
+    screen: screen.width + 'x' + screen.height,
+    browser: navigator.userAgent.slice(0, 100)
   });
-  fetch(SHEETS_URL + '?' + params.toString(), { method: 'GET', mode: 'no-cors' })
-    .catch(() => {});
+  /* img 태그로 전송 → 302 리다이렉트 자동 추적, CORS 무관 */
+  const img = new Image();
+  img.src = SHEETS_URL + '?' + params.toString();
 }
 
 const DATA = {
