@@ -223,7 +223,7 @@ html,body{font-family:'Noto Sans KR',sans-serif;color:var(--ink1);background:var
 </div>
 <script>
 /* ── Google Sheets 다운로드 로깅 ── */
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxu-w0x7_yp8NQ8I2r8Je18epu9jEf4M3JlcIfLpU_R3tLMDt1iScXPzC9Mnik6BmG1/exec';
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycby87HKx_mizidrAYMZy8IaB6_XjamStvEhIUdJSQ9_BtJ_kIyI6I0h7PqxWuZyJmFuV/exec';
 function logDownload(fileName, fileType) {
   const now = new Date();
   const kst = new Date(now.getTime() + 9 * 60 * 60 * 1000);
@@ -235,7 +235,6 @@ function logDownload(fileName, fileType) {
     screen: screen.width + 'x' + screen.height,
     browser: navigator.userAgent.slice(0, 100)
   });
-  /* img 태그로 전송 → 302 리다이렉트 자동 추적, CORS 무관 */
   const img = new Image();
   img.src = SHEETS_URL + '?' + params.toString();
 }
