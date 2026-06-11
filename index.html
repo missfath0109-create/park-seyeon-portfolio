@@ -225,18 +225,25 @@ html,body{font-family:'Noto Sans KR',sans-serif;color:var(--ink1);background:var
 /* ── Google Sheets 다운로드 로깅 ── */
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbw9hudQY1UZtSIsoC0xBcitUXyl4gC8cYvrtFqkWMn9AyyGQdNCXOnFhbljDYX5d2bX1w/exec';
 function logDownload(fileName, fileType) {
-  const now = new Date();
-  const kst = new Date(now.getTime() + 9 * 60 * 60 * 1000);
-  const params = new URLSearchParams({
-    fileName: fileName,
-    fileType: fileType,
-    timestamp: kst.toISOString().replace('T', ' ').slice(0, 19),
-    language: navigator.language || '-',
-    screen: screen.width + 'x' + screen.height,
-    browser: navigator.userAgent.slice(0, 100)
+  const params = new URLSearchParams();
+
+  params.append('fileName', fileName);
+  params.append('fileType', fileType);
+  params.append('timestamp', new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' }));
+  params.append('language', navigator.language || '-');
+  params.append('screen', screen.width + 'x' + screen.height);
+  params.append('browser', navigator.userAgent.slice(0, 100));
+  params.append('cacheBust', Date.now());
+
+  const url = SHEETS_URL + '?' + params.toString();
+
+  console.log('다운로드 로그 URL:', url);
+
+  fetch(url, {
+    method: 'GET',
+    mode: 'no-cors',
+    keepalive: true
   });
-  const img = new Image();
-  img.src = SHEETS_URL + '?' + params.toString();
 }
 
 const DATA = {
