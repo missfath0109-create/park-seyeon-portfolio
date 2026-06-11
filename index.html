@@ -71,11 +71,10 @@
       z-index: 0;
     }
 
+    /* game-frame은 항상 전체 너비, 내부 패딩으로 여백 처리 */
     .game-frame {
-      width: 1400px;
-      max-width: calc(100vw - 48px);
-      margin: 0 auto;
-      padding: 24px 0;
+      width: 100%;
+      padding: 24px 32px;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -170,7 +169,6 @@
       min-height: 620px;
     }
 
-    /* 캐릭터 없는 탭: 2컬럼, 전체 너비 동일하게 유지 */
     .content-grid.no-character {
       grid-template-columns: 200px 1fr;
     }
@@ -535,7 +533,7 @@
     .portfolio-empty-state { padding: 50px 20px; text-align: center; color: var(--ink-3); font-size: 13px; line-height: 1.7; }
 
     @media (max-width: 1100px) {
-      .game-frame { padding: 16px 20px; max-width: 100%; width: 100%; }
+      .game-frame { padding: 16px 20px; }
       .content-grid { grid-template-columns: 1fr; gap: 14px; min-height: auto; }
       .content-grid.no-character { grid-template-columns: 1fr; }
       .side-menu { flex-direction: row; overflow-x: auto; padding: 8px; }
