@@ -356,7 +356,7 @@ function renderAbout(){
   return `<div class="page-header"><div><div class="page-h-name">${d.headline}</div><div class="page-h-en">About Me</div></div><span class="page-h-tag">ABOUT</span></div><div class="card"><div class="about-body">${body}</div></div>${COPYRIGHT}`;
 }
 const PF_NOTICE = `<div class="pf-notice">포트폴리오 원본 파일은 해당 링크에서 확인하실 수 있습니다.<br>링크: <a href="https://drive.google.com/drive/folders/1xDbLCOE562IwBWF-xTqzQ8LlYZKR4PLX?usp=sharing" target="_blank" rel="noopener">https://drive.google.com/drive/folders/1xDbLCOE562IwBWF-xTqzQ8LlYZKR4PLX?usp=sharing</a></div>`;
-function renderPortfolio(){ return PF_NOTICE + (curPF!==null ? renderPFDetail(curPF) : renderPFList()); }
+function renderPortfolio(){ return curPF!==null ? renderPFDetail(curPF) : renderPFList(); }
 function renderPFList(){
   const cards = DATA.portfolio.map((p,i)=>{
     const thumbInner = p.thumbnail
@@ -375,7 +375,7 @@ function renderPFList(){
       </div>
     </div>`;
   }).join('');
-  return `<div class="page-header"><div><div class="page-h-name">Portfolio</div><div class="page-h-en">Works &amp; Documents</div></div><span class="page-h-tag">WORKS</span></div><div class="pf-grid">${cards}</div>${COPYRIGHT}`;
+  return `<div class="page-header"><div><div class="page-h-name">Portfolio</div><div class="page-h-en">Works &amp; Documents</div></div><span class="page-h-tag">WORKS</span></div>${PF_NOTICE}<div class="pf-grid">${cards}</div>${COPYRIGHT}`;
 }
 function renderPFDetail(id){
   const p = DATA.portfolio[id];
@@ -400,6 +400,7 @@ function renderPFDetail(id){
       <div class="pf-detail-title">${p.title}</div>
       ${dlBtn}
     </div>
+    ${PF_NOTICE}
     ${previewHtml}
   </div>${COPYRIGHT}`;
 }
