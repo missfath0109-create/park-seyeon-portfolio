@@ -155,6 +155,9 @@ html,body{font-family:'Noto Sans KR',sans-serif;color:var(--ink1);background:var
 .pf-preview-wrap{width:100%;border:1px solid var(--border2);border-radius:2px;overflow:hidden;background:rgba(255,255,255,0.97);}
 .pf-preview-wrap iframe{display:block;width:100%;height:82vh;border:none;}
 .pf-preview-wrap img{display:block;width:100%;height:auto;}
+.pf-pdf-mobile{display:flex;flex-direction:column;align-items:center;gap:14px;padding:16px;}
+.pf-pdf-mobile img{width:100%;height:auto;border-radius:1px;}
+.pf-pdf-open{align-self:center;}
 .pf-preview-ph{padding:60px 20px;text-align:center;color:var(--ink3);font-size:12.5px;line-height:1.9;background:linear-gradient(180deg,rgba(28,37,64,0.75),rgba(14,20,32,0.9));border:1px solid var(--border);border-radius:3px;}
 .pf-preview-ph svg{margin:0 auto 14px;display:block;color:var(--gold);opacity:0.25;}
 ::-webkit-scrollbar{width:5px;height:5px;}
@@ -376,7 +379,13 @@ function renderPFDetail(id){
   const dlBtn = p.dl?`<button class="pf-dl-btn" data-dl="${p.dl}" data-dlname="${p.dlName||p.dl}">${IC.dl} 다운로드</button>`:'';
   let previewHtml = '';
   if(p.type === 'pdf'){
-    previewHtml = `<div class="pf-preview-wrap"><iframe src="${p.dl}" title="${p.title} 미리보기"></iframe></div>`;
+    const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+    if(isMobile){
+      const thumb = p.thumbnail ? `<img src="${p.thumbnail}" alt="${p.title} 미리보기">` : '';
+      previewHtml = `<div class="pf-preview-wrap pf-pdf-mobile">${thumb}<a class="pf-dl-btn pf-pdf-open" href="${p.dl}" target="_blank" rel="noopener">${IC.dl} PDF 새 탭에서 보기</a></div>`;
+    } else {
+      previewHtml = `<div class="pf-preview-wrap"><iframe src="${p.dl}" title="${p.title} 미리보기"></iframe></div>`;
+    }
   } else if(p.type === 'xlsx' && p.preview){
     previewHtml = `<div class="pf-preview-wrap"><img src="${p.preview}" alt="${p.title} 미리보기" onerror="this.parentElement.innerHTML='<div class=pf-preview-ph><svg width=48 height=48 viewBox=\\'0 0 24 24\\' fill=none stroke=currentColor stroke-width=1.2><rect x=3 y=3 width=18 height=18 rx=2/><circle cx=9 cy=9 r=2/><path d=\\'M21 15l-5-5L5 21\\'/></svg>이미지를 준비 중입니다.<br>곧 업로드될 예정이에요!</div>'"></div>`;
   } else {
