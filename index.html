@@ -238,7 +238,7 @@ html,body{font-family:'Noto Sans KR',sans-serif;color:var(--ink1);background:var
     </div>
   </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
 <script>
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbw9hudQY1UZtSIsoC0xBcitUXyl4gC8cYvrtFqkWMn9AyyGQdNCXOnFhbljDYX5d2bX1w/exec';
 function logDownload(fileName, fileType) {
@@ -438,6 +438,119 @@ function switchTab(tab){
   }
 }
 const sheetCache = {};
+const BORDER_WIDTH = {thin:'1px',medium:'2px',thick:'3px',double:'3px',hair:'1px',dotted:'1px',dashed:'1px',mediumDashed:'2px',dashDot:'1px',dashDotDot:'1px',slantDashDot:'1px'};
+const BORDER_STYLE = {thin:'solid',medium:'solid',thick:'solid',double:'double',hair:'solid',dotted:'dotted',dashed:'dashed',mediumDashed:'dashed',dashDot:'dashed',dashDotDot:'dashed',slantDashDot:'dashed'};
+function argbToCss(argb){
+  if(!argb) return null;
+  const hex = argb.length===8 ? argb.slice(2) : argb;
+  if(hex.toUpperCase()==='000000' && argb.length===8 && argb.slice(0,2)==='00') return null;
+  return '#'+hex;
+}
+function borderSideToCss(side){
+  if(!side || !side.style) return null;
+  const color = argbToCss(side.color && side.color.argb) || '#999';
+  const width = BORDER_WIDTH[side.style] || '1px';
+  const style = BORDER_STYLE[side.style] || 'solid';
+  return `${width} ${style} ${color}`;
+}
+function cellValueText(cell){
+  let v = cell.value;
+  if(v===null||v===undefined) return '';
+  if(typeof v==='object'){
+    if(v.richText) return v.richText.map(rt=>rt.text).join('');
+    if(v.result!==undefined) v=v.result;
+    else if(v.text!==undefined) v=v.text;
+    else if(v.error!==undefined) v=v.error;
+  }
+  if(v instanceof Date) return v.toLocaleDateString();
+  if(typeof v==='number'){
+    return String(Math.round(v*10000)/10000);
+  }
+  return String(v);
+}
+function escapeHtml(s){
+  return s.replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function cellStyleToCss(cell){
+  const styles=[];
+  const fill = cell.fill;
+  if(fill && fill.type==='pattern' && fill.pattern==='solid' && fill.fgColor){
+    const bg = argbToCss(fill.fgColor.argb);
+    if(bg) styles.push(`background-color:${bg}`);
+  }
+  const font = cell.font;
+  if(font){
+    if(font.bold) styles.push('font-weight:bold');
+    if(font.italic) styles.push('font-style:italic');
+    if(font.underline) styles.push('text-decoration:underline');
+    if(font.color && font.color.argb){
+      const c = argbToCss(font.color.argb);
+      if(c) styles.push(`color:${c}`);
+    }
+    if(font.size) styles.push(`font-size:${font.size}px`);
+  }
+  const align = cell.alignment;
+  if(align){
+    if(align.horizontal) styles.push(`text-align:${align.horizontal}`);
+    if(align.vertical) styles.push(`vertical-align:${align.vertical==='middle'?'middle':align.vertical}`);
+    if(align.wrapText) styles.push('white-space:normal');
+  }
+  const border = cell.border;
+  if(border){
+    ['top','bottom','left','right'].forEach(side=>{
+      const css = border[side] && borderSideToCss(border[side]);
+      if(css) styles.push(`border-${side}:${css}`);
+    });
+  }
+  return styles.join(';');
+}
+function colToNum(col){
+  let n=0;
+  for(let i=0;i<col.length;i++) n = n*26 + (col.charCodeAt(i)-64);
+  return n;
+}
+function parseAddr(addr){
+  const m = addr.match(/^([A-Z]+)(\d+)$/);
+  return {col:colToNum(m[1]), row:parseInt(m[2],10)};
+}
+function worksheetToHtml(ws){
+  const mergeSpans = {};
+  const mergeSkip = new Set();
+  (ws.model.merges||[]).forEach(range=>{
+    const [a,b] = range.split(':');
+    const s = parseAddr(a), e = parseAddr(b);
+    mergeSpans[`${s.row}_${s.col}`] = {rowspan:e.row-s.row+1, colspan:e.col-s.col+1};
+    for(let r=s.row;r<=e.row;r++) for(let c=s.col;c<=e.col;c++){
+      if(r===s.row && c===s.col) continue;
+      mergeSkip.add(`${r}_${c}`);
+    }
+  });
+  const colCount = ws.columnCount;
+  let colgroup = '<colgroup>';
+  for(let c=1;c<=colCount;c++){
+    const col = ws.getColumn(c);
+    const w = col.width ? Math.round(col.width*7) : 64;
+    colgroup += `<col style="width:${w}px">`;
+  }
+  colgroup += '</colgroup>';
+  let html = `<table>${colgroup}`;
+  for(let r=1;r<=ws.rowCount;r++){
+    const row = ws.getRow(r);
+    const h = row.height ? `height:${Math.round(row.height*1.333)}px;` : '';
+    html += `<tr style="${h}">`;
+    for(let c=1;c<=colCount;c++){
+      const key = `${r}_${c}`;
+      if(mergeSkip.has(key)) continue;
+      const cell = row.getCell(c);
+      const span = mergeSpans[key];
+      const attrs = span ? ` rowspan="${span.rowspan}" colspan="${span.colspan}"` : '';
+      html += `<td${attrs} style="${cellStyleToCss(cell)}">${escapeHtml(cellValueText(cell))}</td>`;
+    }
+    html += '</tr>';
+  }
+  html += '</table>';
+  return html;
+}
 async function loadSheetView(p){
   const tabsEl = document.getElementById('pfSheetTabs');
   const tableEl = document.getElementById('pfSheetTable');
@@ -447,16 +560,19 @@ async function loadSheetView(p){
     if(!wb){
       const res = await fetch(p.dl);
       const buf = await res.arrayBuffer();
-      wb = XLSX.read(buf, {type:'array'});
+      wb = new ExcelJS.Workbook();
+      await wb.xlsx.load(buf);
       sheetCache[p.dl] = wb;
     }
     const renderSheet = name=>{
-      tableEl.innerHTML = XLSX.utils.sheet_to_html(wb.Sheets[name], {header:'', footer:''});
+      const ws = wb.getWorksheet(name);
+      tableEl.innerHTML = worksheetToHtml(ws);
       tabsEl.querySelectorAll('.pf-sheet-tab').forEach(b=>b.classList.toggle('active', b.dataset.sheet===name));
     };
-    tabsEl.innerHTML = wb.SheetNames.map(name=>`<button class="pf-sheet-tab" data-sheet="${name}">${name}</button>`).join('');
+    const names = wb.worksheets.map(ws=>ws.name);
+    tabsEl.innerHTML = names.map(name=>`<button class="pf-sheet-tab" data-sheet="${name}">${name}</button>`).join('');
     tabsEl.querySelectorAll('.pf-sheet-tab').forEach(b=>b.addEventListener('click',()=>renderSheet(b.dataset.sheet)));
-    renderSheet(wb.SheetNames[0]);
+    renderSheet(names[0]);
   } catch(err){
     tabsEl.innerHTML = '';
     tableEl.innerHTML = `<div class="pf-preview-ph">시트를 불러오지 못했습니다.</div>`;
