@@ -33,8 +33,9 @@ html,body{font-family:'Noto Sans KR',sans-serif;color:var(--ink1);background:var
 .hud-diamond{position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);width:9px;height:9px;background:var(--gold2);clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);box-shadow:0 0 8px var(--gold2);}
 .hud-left{display:flex;align-items:center;gap:16px;}
 .hud-icon{width:38px;height:38px;border:1px solid var(--border);border-radius:3px;display:flex;align-items:center;justify-content:center;background:rgba(212,185,106,0.1);color:var(--gold2);}
-.hud-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;letter-spacing:0.5em;text-transform:uppercase;color:var(--ink1);}
-.hud-subtitle{font-size:10px;color:var(--ink3);letter-spacing:0.2em;text-transform:uppercase;margin-top:2px;}
+.hud-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;letter-spacing:0.5em;text-transform:uppercase;color:var(--ink1);text-align:justify;text-align-last:justify;}
+.hud-subtitle{font-size:10px;color:var(--ink3);letter-spacing:0.2em;text-transform:uppercase;margin-top:4px;text-align:justify;text-align-last:justify;}
+.hud-left>div:not(.hud-icon){display:flex;flex-direction:column;width:-moz-fit-content;width:fit-content;}
 .hud-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;font-size:11px;font-weight:500;letter-spacing:0.08em;color:var(--ink2);border:1px solid var(--border2);border-radius:2px;background:rgba(255,255,255,0.04);cursor:pointer;transition:all .2s;font-family:'Noto Sans KR',sans-serif;}
 .hud-btn:hover{color:var(--gold2);border-color:var(--border);background:rgba(212,185,106,0.08);}
 #main{display:grid;grid-template-columns:240px 1fr;flex:1;min-height:0;overflow:hidden;}
@@ -78,10 +79,10 @@ html,body{font-family:'Noto Sans KR',sans-serif;color:var(--ink1);background:var
 .np-tag.el{color:var(--blue2);border-color:rgba(74,158,202,0.4);background:rgba(74,158,202,0.08);}
 .np-tag.role{color:var(--gold2);border-color:rgba(212,185,106,0.4);background:rgba(212,185,106,0.08);}
 .np-tag.exp{color:var(--ink2);border-color:var(--border2);background:rgba(255,255,255,0.04);}
-.catchphrase{background:linear-gradient(135deg,rgba(28,37,64,0.7),rgba(14,20,32,0.85));border:1px solid var(--border2);border-left:2px solid var(--gold);border-radius:3px;padding:14px 18px;font-size:12.5px;line-height:1.8;color:var(--ink2);font-family:'Noto Serif KR',serif;}
+.catchphrase{background:linear-gradient(135deg,rgba(28,37,64,0.55),rgba(14,20,32,0.62));border:1px solid var(--border2);border-left:2px solid var(--gold);border-radius:3px;padding:14px 18px;font-size:12.5px;line-height:1.8;color:var(--ink2);font-family:'Noto Sans KR',sans-serif;}
 #infoPanel{display:flex;flex-direction:column;gap:20px;animation:fadeUp .4s cubic-bezier(.16,1,.3,1);}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-.card{background:linear-gradient(180deg,rgba(28,37,64,0.75),rgba(14,20,32,0.9));border:1px solid var(--border);border-radius:3px;padding:24px 26px;position:relative;overflow:hidden;box-shadow:var(--shadow),inset 0 1px 0 rgba(212,185,106,0.1);}
+.card{background:linear-gradient(180deg,rgba(28,37,64,0.5),rgba(14,20,32,0.58));border:1px solid var(--border);border-radius:3px;padding:24px 26px;position:relative;overflow:hidden;box-shadow:var(--shadow),inset 0 1px 0 rgba(212,185,106,0.1);}
 .card::before{content:'';position:absolute;top:0;left:20px;right:20px;height:1px;background:linear-gradient(90deg,transparent,rgba(212,185,106,0.3),transparent);}
 .card-title{display:flex;align-items:center;gap:10px;font-family:'Noto Serif KR',serif;font-size:15px;font-weight:700;color:var(--gold2);letter-spacing:0.1em;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border2);position:relative;}
 .card-title::after{content:'';position:absolute;bottom:-1px;left:0;width:36px;height:1px;background:var(--gold);box-shadow:0 0 4px var(--gold);}
@@ -123,12 +124,18 @@ html,body{font-family:'Noto Sans KR',sans-serif;color:var(--ink1);background:var
 .about-body p:last-child{margin-bottom:0;}
 .about-sub{font-family:'Noto Serif KR',serif;font-size:15.5px;font-weight:700;color:var(--gold2);letter-spacing:0.03em;line-height:1.6;margin:30px 0 14px;padding-left:14px;border-left:3px solid var(--gold);text-shadow:0 0 10px var(--gold-glow);}
 .about-sub:first-child{margin-top:0;}
+.about-card .about-sub{margin:0 0 10px;}
+.about-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+.about-tag{font-family:'Noto Sans KR',sans-serif;font-size:11px;font-weight:500;border:1px solid;border-radius:2px;padding:3px 9px;letter-spacing:0.02em;}
+.about-tag:nth-child(3n+1){color:#e6a6be;background:rgba(224,150,180,0.09);border-color:rgba(224,150,180,0.32);}
+.about-tag:nth-child(3n+2){color:var(--blue2);background:rgba(74,158,202,0.08);border-color:rgba(74,158,202,0.32);}
+.about-tag:nth-child(3n+3){color:#9fc6a6;background:rgba(120,170,130,0.09);border-color:rgba(120,170,130,0.32);}
 .action-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:15px;background:linear-gradient(180deg,rgba(212,185,106,0.22),rgba(143,100,20,0.35));border:1px solid var(--gold);border-radius:2px;font-family:'Noto Serif KR',serif;font-size:13px;font-weight:700;color:var(--gold2);letter-spacing:0.15em;cursor:pointer;text-decoration:none;transition:all .25s;position:relative;box-shadow:0 0 16px rgba(212,185,106,0.1),inset 0 1px 0 rgba(248,235,180,0.15);}
 .action-btn::before,.action-btn::after{content:'◆';position:absolute;top:50%;transform:translateY(-50%);font-size:7px;color:var(--gold);opacity:.6;}
 .action-btn::before{left:16px;}.action-btn::after{right:16px;}
 .action-btn:hover{background:linear-gradient(180deg,rgba(234,217,140,0.32),rgba(212,185,106,0.45));transform:translateY(-1px);}
 .copyright{margin-top:28px;padding:16px 0;border-top:1px solid var(--border2);text-align:center;font-size:11px;color:var(--ink4);line-height:1.7;letter-spacing:0.03em;}
-.page-header{display:flex;align-items:center;gap:14px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border2);position:relative;}
+.page-header{display:flex;align-items:flex-end;gap:14px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border2);position:relative;}
 .page-header::after{content:'';position:absolute;bottom:-1px;left:0;width:48px;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold2));box-shadow:0 0 6px var(--gold);}
 .page-h-name{font-family:'Noto Serif KR',serif;font-size:22px;font-weight:700;color:var(--ink1);}
 .page-h-en{font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--ink3);letter-spacing:0.25em;text-transform:uppercase;margin-top:2px;}
@@ -200,7 +207,7 @@ html,body{font-family:'Noto Sans KR',sans-serif;color:var(--ink1);background:var
 <div id="app">
   <header id="hud">
     <div class="hud-left">
-      <div class="hud-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <div class="hud-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3h6v3H9z"/><path d="M9 11h6M9 15h4"/></svg></div>
       <div>
         <div class="hud-title">Park Seyeon</div>
         <div class="hud-subtitle">Game System Planner · Portfolio</div>
@@ -240,7 +247,6 @@ html,body{font-family:'Noto Sans KR',sans-serif;color:var(--ink1);background:var
     </div>
   </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
 <script>
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbw9hudQY1UZtSIsoC0xBcitUXyl4gC8cYvrtFqkWMn9AyyGQdNCXOnFhbljDYX5d2bX1w/exec';
 function logDownload(fileName, fileType) {
@@ -287,7 +293,6 @@ const DATA = {
       { name: "Python",        pct: 30  }
     ],
     certs: [
-      { name: "SQLD 개발자",        date: "2026.06" },
       { name: "GTQ 2급",            date: "2017.12" },
       { name: "영상편집전문인 2급",  date: "2017.12" },
       { name: "운전면허 2종 보통",   date: "2017.07" }
@@ -305,34 +310,55 @@ const DATA = {
   ],
   about: {
     headline: "시스템을 설계하는 사람",
-    body: `[재미를 '보는 경험'에서 '직접 설계하는 경험'으로]
-예능 방송의 자막 디자인 업무를 수행하며 시청자의 니즈를 파악하여 시청자가 어떤 타이밍에 웃고, 어떤 표현에 더 쉽게 반응하는지 고민하며 장면의 재미를 극대화하는 과정에서 큰 매력을 느껴왔습니다. 자막은 화면 위에 짧게 머무는 요소이지만, 표현 방식과 배치, 타이밍에 따라 장면의 몰입도와 전달력이 달라진다는 점을 현장에서 배웠습니다.
-이 경험을 통해 저는 콘텐츠의 재미가 큰 연출에서만 만들어지는 것이 아니라, 사용자가 자연스럽게 받아들이는 작은 디테일에서 완성된다는 점을 깨달았습니다. 이후에는 재미를 더 능동적으로 기획할 수 있는 분야에 도전하고 싶어 게임 기획자로 직무를 전환하였습니다. 게임은 유저의 선택과 반응에 따라 경험이 달라지기 때문에, 유저가 무엇을 원하고 어떤 지점에서 재미를 느끼는지 파악하여 이를 게임 콘텐츠로 구체화하는 역량이 중요하다고 생각했습니다.
-저는 방송에서 익힌 트렌디한 감각과 디테일을 바탕으로, 유저의 니즈를 파악하고 재미를 느낄 수 있는 콘텐츠를 만드는 기획자로 성장하고자 합니다. 이제는 경험과 감각에 기반한 기획을 넘어, [AX융합 데이터 기반 기획자] 교육 과정을 통해 웹 크롤링과 데이터 분석 방법을 익히고 있습니다. 이를 바탕으로 게임에 대한 유저 리뷰와 불만 사항, 만족 요인을 수집·분석하여 인사이트를 도출하고, 유저가 실제로 원하는 콘텐츠를 기획하는 실무형 전문 기획자가 되고 싶습니다.
-[기획서의 가독성과 데이터의 논리를 높이는 예리한 '디테일러']
-저의 강점은 복잡한 정보 속에서 핵심을 포착하고, 이를 누구나 쉽게 이해할 수 있도록 정리하는 예리한 눈썰미와 꼼꼼함입니다. 방송 자막 디자인 업무를 수행하며 오탈자, 가독성, 화면 배치, 표현 방식 등 작은 요소 하나가 최종 결과물의 완성도와 신뢰도에 영향을 줄 수 있다는 것을 체감했습니다. 특히 짧은 시간 안에 정보를 명확하게 전달해야 하는 자막 업무 특성상, 보는 사람이 내용을 자연스럽게 이해할 수 있도록 구성하는 능력이 중요했습니다.
-이러한 경험은 게임 기획 문서를 작성할 때도 강점으로 이어졌습니다. 저는 기획 문서를 단순히 기능을 설명하는 자료가 아니라, 개발자·아트·QA 등 여러 담당자가 같은 기준으로 이해하고 업무를 진행할 수 있도록 돕는 기준 문서라고 생각합니다. 그렇기 때문에 사소한 오타 하나도 전체 문서의 신뢰도에 영향을 줄 수 있다는 생각으로 문장의 흐름, 용어의 일관성, 가독성과 디테일을 철저히 확인하려고 노력했습니다.
-이전 프로젝트에서 다수의 캡처본과 텍스트를 정리할 때도 보는 사람의 동선을 고려해 정보를 배치하고, 포토샵을 활용해 화면의 핵심 요소가 잘 드러나도록 가독성을 높였습니다. 이러한 저의 섬세함은 복잡한 내용을 명확한 구조로 정리하고, 협업자가 빠르게 이해할 수 있는 문서로 구체화하는 데 강점으로 작용했습니다. 앞으로도 작은 디테일을 놓치지 않는 태도로 서비스와 기획 결과물의 완성도를 높이는 기획자가 되고자 합니다.
-[사용자 경험과 플랫폼을 함께 고려한 게임 기획 경험]
-모비릭스에서 게임 기획자로 근무하며 신규 게임 기획, UI/UX 설계, 플랫폼 런칭 대응, 운영 툴 기획 업무를 수행했습니다. 이 과정에서 사용자 경험, 플랫폼 특성, 운영 편의성, 개발 가능성처럼 서로 다른 조건을 함께 고려해야 하는 상황을 자주 마주했습니다. 저는 흩어진 요구사항을 정리하고 우선순위를 구분하여, 협업자가 같은 방향으로 이해할 수 있는 기획 문서와 실행 기준으로 구체화했습니다.
-특히 플랫폼 런칭 대응 업무에서는 단순히 정책을 맞추는 데 그치지 않고, 플랫폼별 유저의 플레이 맥락을 고려해 UI/UX를 조정했습니다. 예를 들어 페이스북 플랫폼은 앱을 설치해 깊게 몰입하기보다 플랫폼 내에서 가볍게 진입하는 유저가 많다고 판단했습니다. 이에 따라 초기 진입 절차를 줄이고, 게임에 들어오자마자 바로 플레이를 경험할 수 있도록 화면 흐름을 단순화했습니다. 또한 화면 규격, 광고·결제 정책, 플랫폼 가이드라인을 함께 정리하여 기획 의도와 사용자 경험의 일관성이 유지되도록 조율했습니다.
-이러한 경험을 통해 저는 유저가 어떤 환경에서 서비스를 접하는지 파악하고, 그에 맞는 화면 흐름과 서비스 경험을 설계하는 역량을 쌓았습니다. 앞으로도 사용자 경험과 운영 효율, 협업자의 이해도를 함께 고려하며 완성도 높은 게임 시스템을 설계하는 기획자로 기여하고자 합니다.
-[유저의 니즈를 읽고 재미 있는 콘텐츠로 구체화하는 기획자]
-저는 유저가 게임 안에서 하는 작은 행동 하나도 의미 있는 경험으로 이어질 수 있도록 설계하는 기획자가 되고 싶습니다. 게임의 재미는 버튼을 눌렀을 때의 반응, 목표를 발견하는 순간, 플레이 결과를 확인하는 과정처럼 사소한 경험들이 쌓이며 완성된다고 생각합니다. 그래서 저는 유저의 소소한 행동에서도 확실한 피드백과 보상을 느낄 수 있는 게임을 기획하고 싶습니다.
-하나의 아이디어를 정답처럼 고정하기보다, 유저가 어떤 흐름에서 흥미를 느끼고 어디서 이탈할 수 있는지 계속 가정하고 검토하려고 합니다. 작은 기능이라도 유저에게 어떤 기대감을 줄 수 있는지, 반복 플레이 속에서도 다음 행동의 이유를 만들 수 있는지 고민하며 콘텐츠와 시스템을 설계하고자 합니다.
-앞으로도 저는 유저의 반응을 세심하게 읽고, 작은 재미 요소를 놓치지 않으며, 계속 시도하고 개선하는 기획자로 성장하고 싶습니다. 사용자가 자연스럽게 몰입하고 다시 플레이하고 싶다고 느끼는 경험을 만들기 위해, 감각과 디테일, 실무 경험을 바탕으로 완성도 높은 게임 콘텐츠와 시스템을 기획하는 데 기여하겠습니다.
-감사합니다.`
+    sections: [
+      {
+        title: "재미를 '보는 경험'에서 '직접 설계하는 경험'으로",
+        tags: ["#방송자막_출신", "#유저_니즈_분석", "#재미_설계"],
+        body: [
+          "예능 방송의 자막 디자인 업무를 수행하며 시청자의 니즈를 파악하여 시청자가 어떤 타이밍에 웃고, 어떤 표현에 더 쉽게 반응하는지 고민하며 장면의 재미를 극대화하는 과정에서 큰 매력을 느껴왔습니다. 자막은 화면 위에 짧게 머무는 요소이지만, 표현 방식과 배치, 타이밍에 따라 장면의 몰입도와 전달력이 달라진다는 점을 현장에서 배웠습니다.",
+          "이 경험을 통해 저는 콘텐츠의 재미가 큰 연출에서만 만들어지는 것이 아니라, 사용자가 자연스럽게 받아들이는 작은 디테일에서 완성된다는 점을 깨달았습니다. 이후에는 재미를 더 능동적으로 기획할 수 있는 분야에 도전하고 싶어 게임 기획자로 직무를 전환하였습니다. 게임은 유저의 선택과 반응에 따라 경험이 달라지기 때문에, 유저가 무엇을 원하고 어떤 지점에서 재미를 느끼는지 파악하여 이를 게임 콘텐츠로 구체화하는 역량이 중요하다고 생각했습니다.",
+          "저는 방송에서 익힌 트렌디한 감각과 디테일을 바탕으로, 유저의 니즈를 파악하고 재미를 느낄 수 있는 콘텐츠를 만드는 기획자로 성장하고자 합니다. 이제는 경험과 감각에 기반한 기획을 넘어, [AX융합 데이터 기반 기획자] 교육 과정을 통해 웹 크롤링과 데이터 분석 방법을 익히고 있습니다. 이를 바탕으로 게임에 대한 유저 리뷰와 불만 사항, 만족 요인을 수집·분석하여 인사이트를 도출하고, 유저가 실제로 원하는 콘텐츠를 기획하는 실무형 전문 기획자가 되고 싶습니다."
+        ]
+      },
+      {
+        title: "기획서의 가독성과 데이터의 논리를 높이는 예리한 '디테일러'",
+        tags: ["#디테일", "#가독성_있는_기획서", "#문서_신뢰도"],
+        body: [
+          "저의 강점은 복잡한 정보 속에서 핵심을 포착하고, 이를 누구나 쉽게 이해할 수 있도록 정리하는 예리한 눈썰미와 꼼꼼함입니다. 방송 자막 디자인 업무를 수행하며 오탈자, 가독성, 화면 배치, 표현 방식 등 작은 요소 하나가 최종 결과물의 완성도와 신뢰도에 영향을 줄 수 있다는 것을 체감했습니다. 특히 짧은 시간 안에 정보를 명확하게 전달해야 하는 자막 업무 특성상, 보는 사람이 내용을 자연스럽게 이해할 수 있도록 구성하는 능력이 중요했습니다.",
+          "이러한 경험은 게임 기획 문서를 작성할 때도 강점으로 이어졌습니다. 저는 기획 문서를 단순히 기능을 설명하는 자료가 아니라, 개발자·아트·QA 등 여러 담당자가 같은 기준으로 이해하고 업무를 진행할 수 있도록 돕는 기준 문서라고 생각합니다. 그렇기 때문에 사소한 오타 하나도 전체 문서의 신뢰도에 영향을 줄 수 있다는 생각으로 문장의 흐름, 용어의 일관성, 가독성과 디테일을 철저히 확인하려고 노력했습니다.",
+          "이전 프로젝트에서 다수의 캡처본과 텍스트를 정리할 때도 보는 사람의 동선을 고려해 정보를 배치하고, 포토샵을 활용해 화면의 핵심 요소가 잘 드러나도록 가독성을 높였습니다. 이러한 저의 섬세함은 복잡한 내용을 명확한 구조로 정리하고, 협업자가 빠르게 이해할 수 있는 문서로 구체화하는 데 강점으로 작용했습니다. 앞으로도 작은 디테일을 놓치지 않는 태도로 서비스와 기획 결과물의 완성도를 높이는 기획자가 되고자 합니다."
+        ]
+      },
+      {
+        title: "사용자 경험과 플랫폼을 함께 고려한 게임 기획 경험",
+        tags: ["#UX_설계", "#플랫폼_런칭_대응", "#실무경험"],
+        body: [
+          "모비릭스에서 게임 기획자로 근무하며 신규 게임 기획, UI/UX 설계, 플랫폼 런칭 대응, 운영 툴 기획 업무를 수행했습니다. 이 과정에서 사용자 경험, 플랫폼 특성, 운영 편의성, 개발 가능성처럼 서로 다른 조건을 함께 고려해야 하는 상황을 자주 마주했습니다. 저는 흩어진 요구사항을 정리하고 우선순위를 구분하여, 협업자가 같은 방향으로 이해할 수 있는 기획 문서와 실행 기준으로 구체화했습니다.",
+          "특히 플랫폼 런칭 대응 업무에서는 단순히 정책을 맞추는 데 그치지 않고, 플랫폼별 유저의 플레이 맥락을 고려해 UI/UX를 조정했습니다. 예를 들어 페이스북 플랫폼은 앱을 설치해 깊게 몰입하기보다 플랫폼 내에서 가볍게 진입하는 유저가 많다고 판단했습니다. 이에 따라 초기 진입 절차를 줄이고, 게임에 들어오자마자 바로 플레이를 경험할 수 있도록 화면 흐름을 단순화했습니다. 또한 화면 규격, 광고·결제 정책, 플랫폼 가이드라인을 함께 정리하여 기획 의도와 사용자 경험의 일관성이 유지되도록 조율했습니다.",
+          "이러한 경험을 통해 저는 유저가 어떤 환경에서 서비스를 접하는지 파악하고, 그에 맞는 화면 흐름과 서비스 경험을 설계하는 역량을 쌓았습니다. 앞으로도 사용자 경험과 운영 효율, 협업자의 이해도를 함께 고려하며 완성도 높은 게임 시스템을 설계하는 기획자로 기여하고자 합니다."
+        ]
+      },
+      {
+        title: "유저의 니즈를 읽고 재미 있는 콘텐츠로 구체화하는 기획자",
+        tags: ["#유저_피드백", "#몰입_경험", "#지속적_개선"],
+        body: [
+          "저는 유저가 게임 안에서 하는 작은 행동 하나도 의미 있는 경험으로 이어질 수 있도록 설계하는 기획자가 되고 싶습니다. 게임의 재미는 버튼을 눌렀을 때의 반응, 목표를 발견하는 순간, 플레이 결과를 확인하는 과정처럼 사소한 경험들이 쌓이며 완성된다고 생각합니다. 그래서 저는 유저의 소소한 행동에서도 확실한 피드백과 보상을 느낄 수 있는 게임을 기획하고 싶습니다.",
+          "하나의 아이디어를 정답처럼 고정하기보다, 유저가 어떤 흐름에서 흥미를 느끼고 어디서 이탈할 수 있는지 계속 가정하고 검토하려고 합니다. 작은 기능이라도 유저에게 어떤 기대감을 줄 수 있는지, 반복 플레이 속에서도 다음 행동의 이유를 만들 수 있는지 고민하며 콘텐츠와 시스템을 설계하고자 합니다.",
+          "앞으로도 저는 유저의 반응을 세심하게 읽고, 작은 재미 요소를 놓치지 않으며, 계속 시도하고 개선하는 기획자로 성장하고 싶습니다. 사용자가 자연스럽게 몰입하고 다시 플레이하고 싶다고 느끼는 경험을 만들기 위해, 감각과 디테일, 실무 경험을 바탕으로 완성도 높은 게임 콘텐츠와 시스템을 기획하는 데 기여하겠습니다."
+        ]
+      }
+    ]
   },
   portfolio: [
     { title:"두근두근타운 분석 및 개선안", desc:"라이프 시뮬레이션 게임의 시스템 구조 분석과 개선안 제안", tag:"게임 분석", type:"pdf", dl:"두근두근타운_분석 및 개선안_박세연.pdf", dlName:"두근두근타운_분석및개선안_박세연.pdf", thumbnail:"thumbnails/두근두근타운 분석 및 개선안.png" },
     { title:"원신 비경 역기획서", desc:"원신 비경 시스템의 역기획 및 구조 분석", tag:"역기획", type:"xlsx", dl:"원신_비경_역기획서_박세연.xlsx", dlName:"원신_비경_역기획서_박세연.xlsx", preview:"previews/원신_비경_역기획서.jpg", thumbnail:"thumbnails/원신_비경_썸네일.jpg" },
-    { title:"원신 비경 테이블", desc:"원신 비경 시스템 데이터 테이블 정리", tag:"역기획", type:"xlsx", dl:"원신_비경_테이블_박세연.xlsx", dlName:"원신_비경_테이블_박세연.xlsx", preview:"previews/원신_비경_테이블.png", thumbnail:"thumbnails/원신_비경_썸네일.jpg", sheetView:true },
+    { title:"원신 비경 테이블", desc:"원신 비경 시스템 데이터 테이블 정리", tag:"역기획", type:"xlsx", dl:"원신_비경_테이블_박세연.xlsx", dlName:"원신_비경_테이블_박세연.xlsx", thumbnail:"thumbnails/원신_비경_썸네일.jpg", driveId:"17q8Q_AwmVJPL2O5vhNh62JfHb4M1WBCm" },
     { title:"블루아카이브 고유무기 역기획서", desc:"블루아카이브 고유무기 시스템의 역기획 및 구조 분석", tag:"역기획", type:"xlsx", dl:"블루아카이브_고유무기_역기획서_박세연.xlsx", dlName:"블루아카이브_고유무기_역기획서_박세연.xlsx", thumbnail:"thumbnails/블루아카이브_고유무기_썸네일.jpg", sheetImgs:[
       { name:"INDEX", img:"previews/블루아카이브_고유무기_역기획서/INDEX.jpg" },
       { name:"고유무기 해금 및 획득", img:"previews/블루아카이브_고유무기_역기획서/고유무기_해금_및_획득.jpg" },
       { name:"고유무기 성장", img:"previews/블루아카이브_고유무기_역기획서/고유무기_성장.jpg" }
     ] },
-    { title:"블루아카이브 고유무기 테이블", desc:"블루아카이브 고유무기 데이터 테이블 정리", tag:"역기획", type:"xlsx", dl:"블루아카이브_고유무기_테이블_박세연.xlsx", dlName:"블루아카이브_고유무기_테이블_박세연.xlsx", thumbnail:"thumbnails/블루아카이브_고유무기_썸네일.jpg", preview:"previews/블루아카이브_고유무기_테이블.png", sheetView:true },
+    { title:"블루아카이브 고유무기 테이블", desc:"블루아카이브 고유무기 데이터 테이블 정리", tag:"역기획", type:"xlsx", dl:"블루아카이브_고유무기_테이블_박세연.xlsx", dlName:"블루아카이브_고유무기_테이블_박세연.xlsx", thumbnail:"thumbnails/블루아카이브_고유무기_썸네일.jpg", driveId:"1g5NQZZS4j0YRYIFP7ykzt520zZ7fyP4Y" },
     { title:"창작 캐릭터 시스템 기획서", desc:"오리지널 게임의 캐릭터 시스템 전반 기획", tag:"창작 기획", type:"xlsx", dl:"창작_캐릭터시스템(기획서)_박세연.xlsx", dlName:"창작_캐릭터시스템_기획서_박세연.xlsx", preview:"previews/창작_캐릭터시스템_기획서.png", thumbnail:"thumbnails/캐릭터 시스템 기획서 + UI 설명.png" },
     { title:"창작 캐릭터 시스템 UI 설명", desc:"캐릭터 시스템의 UI 흐름 및 화면 설명", tag:"창작 기획", type:"xlsx", dl:"창작_캐릭터시스템(UI설명)_박세연.xlsx", dlName:"창작_캐릭터시스템_UI설명_박세연.xlsx", preview:"previews/창작_캐릭터시스템_UI설명.png", thumbnail:"thumbnails/캐릭터 시스템 기획서 + UI 설명.png" },
     { title:"창작 카드 시스템", desc:"오리지널 게임의 카드 시스템 기획", tag:"창작 기획", type:"xlsx", dl:"창작_카드시스템_박세연.xlsx", dlName:"창작_카드시스템_박세연.xlsx", preview:"previews/창작_카드시스템.png", thumbnail:"thumbnails/카드 시스템.png" },
@@ -383,11 +409,12 @@ function renderBasic(){
 }
 function renderAbout(){
   const d = DATA.about;
-  const body = d.body.split('\n').filter(p=>p.trim()).map(p=>{
-    const t = p.trim();
-    return /^\[.*\]$/.test(t) ? `<h3 class="about-sub">${t.slice(1,-1)}</h3>` : `<p>${t}</p>`;
+  const cards = d.sections.map(s=>{
+    const tags = s.tags.map(t=>`<span class="about-tag">${t}</span>`).join('');
+    const body = s.body.map(p=>`<p>${p}</p>`).join('');
+    return `<div class="card about-card"><h3 class="about-sub">${s.title}</h3><div class="about-tags">${tags}</div><div class="about-body">${body}</div></div>`;
   }).join('');
-  return `<div class="page-header"><div><div class="page-h-name">${d.headline}</div><div class="page-h-en">About Me</div></div><span class="page-h-tag">ABOUT</span></div><div class="card"><div class="about-body">${body}</div></div>${COPYRIGHT}`;
+  return `<div class="page-header"><div><div class="page-h-name">${d.headline}</div><div class="page-h-en">About Me</div></div><span class="page-h-tag">ABOUT</span></div>${cards}${COPYRIGHT}`;
 }
 const PF_NOTICE = `<div class="pf-notice">포트폴리오 원본 파일은 해당 링크에서 확인하실 수 있습니다.<br>링크: <a href="https://drive.google.com/drive/folders/1xDbLCOE562IwBWF-xTqzQ8LlYZKR4PLX?usp=sharing" target="_blank" rel="noopener">https://drive.google.com/drive/folders/1xDbLCOE562IwBWF-xTqzQ8LlYZKR4PLX?usp=sharing</a></div>`;
 function renderPortfolio(){ return curPF!==null ? renderPFDetail(curPF) : renderPFList(); }
@@ -423,11 +450,11 @@ function renderPFDetail(id){
     } else {
       previewHtml = `<div class="pf-preview-wrap"><iframe src="${p.dl}" title="${p.title} 미리보기"></iframe></div>`;
     }
+  } else if(p.type === 'xlsx' && p.driveId){
+    previewHtml = `<div class="pf-preview-wrap"><iframe src="https://drive.google.com/file/d/${p.driveId}/preview" title="${p.title} 미리보기" allow="autoplay"></iframe></div>`;
   } else if(p.type === 'xlsx' && p.sheetImgs){
     const tabs = p.sheetImgs.map((s,i)=>`<button class="pf-sheet-tab${i===0?' active':''}" data-sheetimg="${s.img}">${s.name}</button>`).join('');
     previewHtml = `<div class="pf-sheet-tabs">${tabs}</div><div class="pf-preview-wrap"><img id="pfSheetImg" src="${p.sheetImgs[0].img}" alt="${p.title}" loading="lazy" decoding="async"></div>`;
-  } else if(p.type === 'xlsx' && p.sheetView){
-    previewHtml = `<div class="pf-sheet-wrap"><div class="pf-sheet-tabs" id="pfSheetTabs"><div class="pf-sheet-msg">시트를 불러오는 중...</div></div><div class="pf-sheet-table" id="pfSheetTable"></div></div>`;
   } else if(p.type === 'xlsx' && p.preview){
     previewHtml = `<div class="pf-preview-wrap"><img src="${p.preview}" alt="${p.title} 미리보기" loading="lazy" decoding="async" onerror="this.parentElement.innerHTML='<div class=pf-preview-ph><svg width=48 height=48 viewBox=\\'0 0 24 24\\' fill=none stroke=currentColor stroke-width=1.2><rect x=3 y=3 width=18 height=18 rx=2/><circle cx=9 cy=9 r=2/><path d=\\'M21 15l-5-5L5 21\\'/></svg>이미지를 준비 중입니다.<br>곧 업로드될 예정이에요!</div>'"></div>`;
   } else {
@@ -459,151 +486,6 @@ function switchTab(tab){
   const resumeBtn = document.getElementById('resumeDownloadBtn');
   if(resumeBtn){
     resumeBtn.addEventListener('click', () => logDownload('이력서_박세연.pdf', '이력서'));
-  }
-  if(tab==='portfolio' && curPF!==null){
-    const p = DATA.portfolio[curPF];
-    if(p.sheetView) loadSheetView(p);
-  }
-}
-const sheetCache = {};
-const BORDER_WIDTH = {thin:'1px',medium:'2px',thick:'3px',double:'3px',hair:'1px',dotted:'1px',dashed:'1px',mediumDashed:'2px',dashDot:'1px',dashDotDot:'1px',slantDashDot:'1px'};
-const BORDER_STYLE = {thin:'solid',medium:'solid',thick:'solid',double:'double',hair:'solid',dotted:'dotted',dashed:'dashed',mediumDashed:'dashed',dashDot:'dashed',dashDotDot:'dashed',slantDashDot:'dashed'};
-function argbToCss(argb){
-  if(!argb) return null;
-  const hex = argb.length===8 ? argb.slice(2) : argb;
-  if(hex.toUpperCase()==='000000' && argb.length===8 && argb.slice(0,2)==='00') return null;
-  return '#'+hex;
-}
-function borderSideToCss(side){
-  if(!side || !side.style) return null;
-  const color = argbToCss(side.color && side.color.argb) || '#999';
-  const width = BORDER_WIDTH[side.style] || '1px';
-  const style = BORDER_STYLE[side.style] || 'solid';
-  return `${width} ${style} ${color}`;
-}
-function cellValueText(cell){
-  let v = cell.value;
-  if(v===null||v===undefined) return '';
-  if(typeof v==='object'){
-    if(v.richText) return v.richText.map(rt=>rt.text).join('');
-    if(v.result!==undefined) v=v.result;
-    else if(v.text!==undefined) v=v.text;
-    else if(v.error!==undefined) v=v.error;
-  }
-  if(v instanceof Date) return v.toLocaleDateString();
-  if(typeof v==='number'){
-    return String(Math.round(v*10000)/10000);
-  }
-  return String(v);
-}
-function escapeHtml(s){
-  return s.replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-function cellStyleToCss(cell){
-  const styles=[];
-  const fill = cell.fill;
-  if(fill && fill.type==='pattern' && fill.pattern==='solid' && fill.fgColor){
-    const bg = argbToCss(fill.fgColor.argb);
-    if(bg) styles.push(`background-color:${bg}`);
-  }
-  const font = cell.font;
-  if(font){
-    if(font.bold) styles.push('font-weight:bold');
-    if(font.italic) styles.push('font-style:italic');
-    if(font.underline) styles.push('text-decoration:underline');
-    if(font.color && font.color.argb){
-      const c = argbToCss(font.color.argb);
-      if(c) styles.push(`color:${c}`);
-    }
-    if(font.size) styles.push(`font-size:${font.size}px`);
-  }
-  const align = cell.alignment;
-  if(align){
-    if(align.horizontal) styles.push(`text-align:${align.horizontal}`);
-    if(align.vertical) styles.push(`vertical-align:${align.vertical==='middle'?'middle':align.vertical}`);
-    if(align.wrapText) styles.push('white-space:normal');
-  }
-  const border = cell.border;
-  if(border){
-    ['top','bottom','left','right'].forEach(side=>{
-      const css = border[side] && borderSideToCss(border[side]);
-      if(css) styles.push(`border-${side}:${css}`);
-    });
-  }
-  return styles.join(';');
-}
-function colToNum(col){
-  let n=0;
-  for(let i=0;i<col.length;i++) n = n*26 + (col.charCodeAt(i)-64);
-  return n;
-}
-function parseAddr(addr){
-  const m = addr.match(/^([A-Z]+)(\d+)$/);
-  return {col:colToNum(m[1]), row:parseInt(m[2],10)};
-}
-function worksheetToHtml(ws){
-  const mergeSpans = {};
-  const mergeSkip = new Set();
-  (ws.model.merges||[]).forEach(range=>{
-    const [a,b] = range.split(':');
-    const s = parseAddr(a), e = parseAddr(b);
-    mergeSpans[`${s.row}_${s.col}`] = {rowspan:e.row-s.row+1, colspan:e.col-s.col+1};
-    for(let r=s.row;r<=e.row;r++) for(let c=s.col;c<=e.col;c++){
-      if(r===s.row && c===s.col) continue;
-      mergeSkip.add(`${r}_${c}`);
-    }
-  });
-  const colCount = ws.columnCount;
-  let colgroup = '<colgroup>';
-  for(let c=1;c<=colCount;c++){
-    const col = ws.getColumn(c);
-    const w = col.width ? Math.round(col.width*7) : 64;
-    colgroup += `<col style="width:${w}px">`;
-  }
-  colgroup += '</colgroup>';
-  let html = `<table>${colgroup}`;
-  for(let r=1;r<=ws.rowCount;r++){
-    const row = ws.getRow(r);
-    const h = row.height ? `height:${Math.round(row.height*1.333)}px;` : '';
-    html += `<tr style="${h}">`;
-    for(let c=1;c<=colCount;c++){
-      const key = `${r}_${c}`;
-      if(mergeSkip.has(key)) continue;
-      const cell = row.getCell(c);
-      const span = mergeSpans[key];
-      const attrs = span ? ` rowspan="${span.rowspan}" colspan="${span.colspan}"` : '';
-      html += `<td${attrs} style="${cellStyleToCss(cell)}">${escapeHtml(cellValueText(cell))}</td>`;
-    }
-    html += '</tr>';
-  }
-  html += '</table>';
-  return html;
-}
-async function loadSheetView(p){
-  const tabsEl = document.getElementById('pfSheetTabs');
-  const tableEl = document.getElementById('pfSheetTable');
-  if(!tabsEl || !tableEl) return;
-  try{
-    let wb = sheetCache[p.dl];
-    if(!wb){
-      const res = await fetch(p.dl);
-      const buf = await res.arrayBuffer();
-      wb = new ExcelJS.Workbook();
-      await wb.xlsx.load(buf);
-      sheetCache[p.dl] = wb;
-    }
-    const renderSheet = name=>{
-      const ws = wb.getWorksheet(name);
-      tableEl.innerHTML = worksheetToHtml(ws);
-      tabsEl.querySelectorAll('.pf-sheet-tab').forEach(b=>b.classList.toggle('active', b.dataset.sheet===name));
-    };
-    const names = wb.worksheets.map(ws=>ws.name);
-    tabsEl.innerHTML = names.map(name=>`<button class="pf-sheet-tab" data-sheet="${name}">${name}</button>`).join('');
-    tabsEl.querySelectorAll('.pf-sheet-tab').forEach(b=>b.addEventListener('click',()=>renderSheet(b.dataset.sheet)));
-    renderSheet(names[0]);
-  } catch(err){
-    tabsEl.innerHTML = '';
-    tableEl.innerHTML = `<div class="pf-preview-ph">시트를 불러오지 못했습니다.</div>`;
   }
 }
 document.getElementById('leftNav').addEventListener('click',e=>{
